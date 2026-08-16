@@ -326,7 +326,7 @@ class ScannerTests(unittest.TestCase):
             real_fstat = scanner.os.fstat
             captured = []
 
-            def capture_open(path, flags, mode=0o777, *, dir_fd=None):
+            def capture_open(path, flags, mode=0o600, *, dir_fd=None):
                 if dir_fd is None:
                     descriptor = real_open(path, flags, mode)
                 else:
