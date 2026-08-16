@@ -11,6 +11,7 @@ from typing import Optional, Sequence
 
 from . import __version__
 from .reporting import stable_json, write_bundle
+from .safeio import write_text_file
 from .scanner import diff_artifacts, scan
 
 
@@ -69,7 +70,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             if args.out == "-":
                 sys.stdout.write(result)
             else:
-                Path(args.out).write_text(result, encoding="utf-8")
+                write_text_file(args.out, result)
             return 0
         if args.command == "demo":
             with tempfile.TemporaryDirectory() as temp:

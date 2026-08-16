@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If Agent SBOM supports your work, cite this software."
 title: "Agent SBOM"
 type: software
-version: 0.1.0
+version: 0.1.1
 date-released: 2026-08-16
 authors:
   - family-names: Das

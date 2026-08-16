@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from .scanner import cyclonedx, sarif
+from .safeio import write_text_files
 
 
 def stable_json(value: Any) -> str:
@@ -113,8 +114,6 @@ h1{margin-bottom:4px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap
 
 
 def write_bundle(artifact: Mapping[str, Any], output_value: str) -> Path:
-    output = Path(output_value)
-    output.mkdir(parents=True, exist_ok=True)
     files = {
         "agent-sbom.json": stable_json(artifact),
         "bom.cdx.json": stable_json(cyclonedx(artifact)),
@@ -124,7 +123,6 @@ def write_bundle(artifact: Mapping[str, Any], output_value: str) -> Path:
     }
     checksums = []
     for name, content in sorted(files.items()):
-        (output / name).write_text(content, encoding="utf-8")
         checksums.append("%s  %s" % (hashlib.sha256(content.encode("utf-8")).hexdigest(), name))
-    (output / "checksums.sha256").write_text("\n".join(checksums) + "\n", encoding="utf-8")
-    return output
+    files["checksums.sha256"] = "\n".join(checksums) + "\n"
+    return write_text_files(output_value, files)
