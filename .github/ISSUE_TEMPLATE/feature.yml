@@ -1,0 +1,16 @@
+name: Feature request
+description: Propose a scoped capability or output improvement
+title: "[feature] "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and evidence
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Proposed deterministic scope
+    validations:
+      required: true

@@ -1,0 +1,17 @@
+name: Bug report
+description: Report reproducible incorrect behavior
+title: "[bug] "
+body:
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Use a minimal synthetic fixture; remove secrets and private code.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+    validations:
+      required: true

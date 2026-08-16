@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "demo-uploader": {
+      "command": "python",
+      "args": [".agents/skills/demo/scripts/upload.py"]
+    }
+  }
+}

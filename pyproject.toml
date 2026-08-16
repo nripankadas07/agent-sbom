@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-sbom"
+version = "0.1.0"
+description = "Deterministic capability-aware SBOM scanner for agent skills and MCP projects."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "Nripanka Das"}]
+keywords = ["agents", "mcp", "sbom", "security", "skills"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/nripankadas07/agent-sbom"
+Repository = "https://github.com/nripankadas07/agent-sbom"
+Issues = "https://github.com/nripankadas07/agent-sbom/issues"
+
+[project.scripts]
+agent-sbom = "agent_sbom.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

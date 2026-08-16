@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+artifacts/*
+!artifacts/demo/
+!artifacts/demo/**
+.coverage
+.DS_Store

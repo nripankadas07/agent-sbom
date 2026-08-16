@@ -1,0 +1,121 @@
+{
+  "bomFormat": "CycloneDX",
+  "components": [
+    {
+      "bom-ref": "urn:agent-sbom:agent-skill:4d47adc988635d5a",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "57cc1e9c5e8d7b19726f216d387538fdc48561958251f26c057074a71a24f670"
+        }
+      ],
+      "name": ".agents/skills/demo/SKILL.md",
+      "properties": [
+        {
+          "name": "agent-sbom:kind",
+          "value": "agent-skill"
+        },
+        {
+          "name": "agent-sbom:path",
+          "value": ".agents/skills/demo/SKILL.md"
+        },
+        {
+          "name": "agent-sbom:capability",
+          "value": "credential"
+        },
+        {
+          "name": "agent-sbom:capability",
+          "value": "network"
+        }
+      ],
+      "type": "file"
+    },
+    {
+      "bom-ref": "urn:agent-sbom:script:e397b621a10056f2",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a5c9dc3e1f0e20b0d99a65404897712c3d9157ae14d546d2d30c0f2ce9e51ab7"
+        }
+      ],
+      "name": ".agents/skills/demo/scripts/upload.py",
+      "properties": [
+        {
+          "name": "agent-sbom:kind",
+          "value": "script"
+        },
+        {
+          "name": "agent-sbom:path",
+          "value": ".agents/skills/demo/scripts/upload.py"
+        },
+        {
+          "name": "agent-sbom:capability",
+          "value": "credential"
+        },
+        {
+          "name": "agent-sbom:capability",
+          "value": "filesystem"
+        },
+        {
+          "name": "agent-sbom:capability",
+          "value": "network"
+        }
+      ],
+      "type": "file"
+    },
+    {
+      "bom-ref": "urn:agent-sbom:manifest:8fca7290130bd50b",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e4653b33a015ce532383f6668e46da0fadf246f6971410a6844d0a4617e2f7fe"
+        }
+      ],
+      "name": "mcp.json",
+      "properties": [
+        {
+          "name": "agent-sbom:kind",
+          "value": "manifest"
+        },
+        {
+          "name": "agent-sbom:path",
+          "value": "mcp.json"
+        }
+      ],
+      "type": "file"
+    }
+  ],
+  "dependencies": [
+    {
+      "dependsOn": [
+        "urn:agent-sbom:agent-skill:4d47adc988635d5a",
+        "urn:agent-sbom:manifest:8fca7290130bd50b",
+        "urn:agent-sbom:script:e397b621a10056f2"
+      ],
+      "ref": "urn:agent-sbom:project:7964df3118d8b3ec"
+    }
+  ],
+  "metadata": {
+    "component": {
+      "name": "agent-sbom-demo",
+      "type": "application"
+    },
+    "properties": [
+      {
+        "name": "agent-sbom:schema",
+        "value": "agent-sbom/v1"
+      }
+    ],
+    "tools": {
+      "components": [
+        {
+          "name": "agent-sbom",
+          "type": "application",
+          "version": "0.1.0"
+        }
+      ]
+    }
+  },
+  "specVersion": "1.6",
+  "version": 1
+}
