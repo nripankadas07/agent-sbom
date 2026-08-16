@@ -6,6 +6,8 @@ import unittest
 from pathlib import Path
 
 from agent_sbom.cli import main
+from agent_sbom.reporting import stable_json
+from agent_sbom.scanner import scan
 
 
 class CliTests(unittest.TestCase):
@@ -41,6 +43,30 @@ class CliTests(unittest.TestCase):
             self.assertEqual(code, 2)
             self.assertIn("must be a JSON object", errors.getvalue())
             self.assertNotIn("Traceback", errors.getvalue())
+
+    def test_diff_refuses_to_follow_output_symlink(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            subject = root / "subject"
+            subject.mkdir()
+            (subject / "safe.py").write_text("value = 1\n", encoding="utf-8")
+            artifact = stable_json(scan(str(subject)))
+            before = root / "before.json"
+            after = root / "after.json"
+            before.write_text(artifact, encoding="utf-8")
+            after.write_text(artifact, encoding="utf-8")
+            victim = root / "victim.txt"
+            victim.write_text("sentinel", encoding="utf-8")
+            output = root / "diff.json"
+            try:
+                output.symlink_to(victim)
+            except (NotImplementedError, OSError) as exc:
+                self.skipTest("symbolic links are unavailable: %s" % exc)
+            errors = io.StringIO()
+            with contextlib.redirect_stderr(errors):
+                code = main(["diff", str(before), str(after), "--out", str(output)])
+            self.assertEqual(code, 2)
+            self.assertEqual(victim.read_text(encoding="utf-8"), "sentinel")
 
 
 if __name__ == "__main__":
